@@ -15,20 +15,6 @@ There are four main services of this system.
 ### Installation:
 
 
-Install node dependencies in following dir:
-
-	cd dumper
-    npm i
-
-
- 	cd dashboard-backend
-    npm i
-
-
- 	cd dashboard-frontend
-    npm i
-
-
 To run all of these services use:
 
 	docker-compose up
