@@ -1,0 +1,40 @@
+
+@import '~antd/dist/antd.css';
+
+.App {
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 5s linear;
+  width: 120px;;
+  margin-top: 20px;
+}
+
+.App-header {
+  background-color: #222;
+  padding: 20px;
+  text-align: center;
+}
+
+.App-title {
+  font-size: 1.8em;
+  color: white;
+  margin-top: 15px;
+}
+
+/*.App-body {
+  padding: 20px;*/
+
+.ant-table-pagination.ant-pagination {
+    margin: 16px 20px;
+    float: right;
+}
+
+.ant-table-tbody > .inactive {
+  background-color: #FFd300;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

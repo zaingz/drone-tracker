@@ -10,6 +10,12 @@ const getKeys = promisify(redisClient.keys).bind(redisClient)
 const getHash = promisify(redisClient.hgetall).bind(redisClient)
 const getList = promisify(redisClient.lrange).bind(redisClient)
 
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+  next()
+})
+
 app.get('/data', async function (req, res) {
   const droneKeys = await getKeys('*DRONE_*')
   let activeDrones = []
@@ -29,3 +35,5 @@ app.get('/data', async function (req, res) {
 app.listen(3001, function () {
   console.log('Dashboard backend started...')
 })
+
+module.export = app

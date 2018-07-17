@@ -1,4 +1,4 @@
-version: '3'
+version: '2.1'
 services:
   nsqlookupd:
     image: nsqio/nsq
@@ -35,6 +35,11 @@ services:
       - '6379:6379'
     volumes:
       - 'redis_data:/bitnami/redis'
+    healthcheck:
+      test: ["CMD", "redis-cli","ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   dumper-service:
     container_name: dumper-service
@@ -43,8 +48,10 @@ services:
       - './dumper:/usr/src/app'
       - './dumper/package.json:/usr/src/app/package.json'
     depends_on:
-      - redis
-      - nsqd
+      redis:
+        condition: service_healthy
+      nsqd:
+        condition: service_started
     links:
       - redis
       - nsqd
@@ -58,9 +65,23 @@ services:
     ports:
       - '3001:3001'
     depends_on:
-      - redis
+      redis:
+        condition: service_healthy
     links:
       - redis
+
+  frontend-service:
+    container_name: frontend-service
+    build: ./dashboard-frontend
+    volumes:
+      - './dashboard-frontend:/usr/src/app'
+      - './dashboard-frontend/package.json:/usr/src/app/package.json'
+    ports:
+      - '3000:3000'
+    depends_on:
+      - backend-service
+    links:
+      - backend-service
 
 volumes:
   redis_data:
