@@ -1,16 +1,13 @@
 FROM node:latest
 
-# set working directory
-RUN mkdir /usr/src/app
-WORKDIR /usr/src/app
-
-# add `/usr/src/node_modules/.bin` to $PATH
-ENV PATH /usr/src/node_modules/.bin:$PATH
-
-# install and cache app dependencies
-ADD package.json /usr/src/app/package.json
+COPY package.json /data/
+WORKDIR /data/
 RUN npm install
 RUN npm install react-scripts -g
+ENV PATH /data/node_modules/.bin:$PATH
+
+COPY . /data/app/
+WORKDIR /data/app/
 
 # start app
 CMD ["npm", "start"]

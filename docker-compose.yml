@@ -45,8 +45,7 @@ services:
     container_name: dumper-service
     build: ./dumper
     volumes:
-      - './dumper:/usr/src/app'
-      - './dumper/package.json:/usr/src/app/package.json'
+      - './dumper:/data/app'
     depends_on:
       redis:
         condition: service_healthy
@@ -60,8 +59,7 @@ services:
     container_name: backend-service
     build: ./dashboard-backend
     volumes:
-      - './dashboard-backend:/usr/src/app'
-      - './dashboard-backend/package.json:/usr/src/app/package.json'
+      - './dashboard-backend:/data/app'
     ports:
       - '3001:3001'
     depends_on:
@@ -74,8 +72,7 @@ services:
     container_name: frontend-service
     build: ./dashboard-frontend
     volumes:
-      - './dashboard-frontend:/usr/src/app'
-      - './dashboard-frontend/package.json:/usr/src/app/package.json'
+      - './dashboard-frontend:/data/app'
     ports:
       - '3000:3000'
     depends_on:
