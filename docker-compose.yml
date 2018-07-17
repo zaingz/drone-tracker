@@ -49,6 +49,19 @@ services:
       - redis
       - nsqd
 
+  backend-service:
+    container_name: backend-service
+    build: ./dashboard-backend
+    volumes:
+      - './dashboard-backend:/usr/src/app'
+      - './dashboard-backend/package.json:/usr/src/app/package.json'
+    ports:
+      - '3001:3001'
+    depends_on:
+      - redis
+    links:
+      - redis
+
 volumes:
   redis_data:
     driver: local
