@@ -1,0 +1,16 @@
+{
+  "name": "dumper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "zaingz",
+  "license": "ISC",
+  "dependencies": {
+    "nsqjs": "^0.10.1",
+    "redis": "^2.8.0"
+  }
+}
